@@ -25,14 +25,16 @@ class Board():
             previous_x, previous_y = self.crosses.move()
             self.draw()
             if self.game_over(previous_x, previous_y):
+                self.victory("X")
                 self.playing = False
                 break
             previous_x, previous_y = self.noughts.move()
             if self.game_over(previous_x, previous_y):
+                self.victory("X")
                 self.playing = False
                 break
             self.draw()
-
+        
     def draw(self):
         """ Updates the board """
         print("   |   |   ")
@@ -48,11 +50,18 @@ class Board():
         print("   |   |   ")
 
     def game_over(self, X, Y):
+        """ Checks if the game was won by either player """
         if (self.board[0][Y] in self.player_symbols) and self.board[0][Y] == self.board[1][Y] == self.board[2][Y]:
             return True
         elif self.board[X][0] in self.player_symbols and self.board[X][0] == self.board[X][1] == self.board[X][2]:
             return True
         return False
+
+    def victory(self, winner):
+        """ Victroy message """
+        print("")
+        print(winner + "'s WON!!")
+        print("")
         
 
 b = Board()

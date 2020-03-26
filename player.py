@@ -26,7 +26,7 @@ class Player():
             print("Your input must be between 1 and 9!!")
             print("")
             self.move()
-        except Invalid_Move:
+        except InvalidMoveError:
             print("You cannot place a {} on a taken square!!".format(self.type))
             print("")
             self.move()

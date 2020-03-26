@@ -1,5 +1,7 @@
 # Player class file
 
+from errors import *
+
 class Player():
     def __init__(self, game, cross=True, nought=False):
         self.cross = cross
@@ -12,9 +14,21 @@ class Player():
 
     def move(self):
         try: 
-            position = int(input("Select a position to place an {} (0-9): ".format(self.type)))
-            self.game.board[position] = " " + "{}".format(self.type) + " "
+            position = int(input("Select a position to place an {} (1-9): ".format(self.type))) - 1
+            if self.valid_move(position):
+                self.game.board[position] = " " + "{}".format(self.type) + " "
+            else:
+                raise Invalid_Move
         except IndexError:
-            print("Your input must be between 0 and 9!!")
+            print("Your input must be between 1 and 9!!")
             print("")
             self.move()
+        except Invalid_Move:
+            print("You cannot place a {} on a taken square!!".format(self.type))
+            print("")
+            self.move()
+
+    def valid_move(self, position):
+        if self.game.board[position] == "   ":
+            return True
+        return False

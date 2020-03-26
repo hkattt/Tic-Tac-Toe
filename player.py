@@ -26,7 +26,7 @@ class Player():
                 raise InvalidMoveError
         # Input value is too large
         except IndexError:
-            print("Your input must be between 1 and 9!!")
+            print("Your input must be between 1 and 3!!")
             print("")
             self.move()
         except InvalidMoveError:

@@ -15,7 +15,7 @@ class Board():
             decision = input("Do you want to play with a friend? (Y / N) ") # single player or multiplayer
             print("")
             # Checks if the input was valid
-            if decision != "Y" and decision != "Y":
+            if decision != "Y" and decision != "y":
                 raise InputError
             # multiplayer 
             if decision == "Y" or decision == "y":
@@ -105,9 +105,14 @@ class Board():
             print("")
             self.end_game()
 
+    def reset(self):
+        """ Resets the game attributes """
+        self.board = self.board = [["   " for i in range(3)], ["   " for i in range(3)], ["   " for i in range(3)]]
+
 # creates game object (the board)
 game = Board()
 # main loop
 while game.running:
     game.new()
     game.end_game()
+    game.reset()

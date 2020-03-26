@@ -8,6 +8,7 @@ class Player():
         self.cross = cross
         self.nought = nought
         self.game = game
+        # determines what symbol the player is using
         if self.cross:
             self.type = "X"
         else:
@@ -18,10 +19,12 @@ class Player():
         try: 
             X, Y = input("Select a position to place an {} (X, Y): ".format(self.type)).split(" ")
             X, Y = int(X) - 1, int(Y) - 1
+            # Checks if the given input is a legal move
             if self.valid_move(X, Y):
                 self.game.board[X][Y] = " " + "{}".format(self.type) + " "
             else:
                 raise InvalidMoveError
+        # Input value is too large
         except IndexError:
             print("Your input must be between 1 and 9!!")
             print("")

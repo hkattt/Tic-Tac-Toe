@@ -5,6 +5,7 @@ from player import *
 class Board():
     """ Main board / game class """
     def __init__(self):
+        self.running = True
         self.board = ["   " for i in range(9)]
 
     def new(self):
@@ -18,10 +19,12 @@ class Board():
         self.run()
     
     def run(self):
-        self.crosses.move()
-        self.draw()
-        self.noughts.move()
-        self.draw()
+        self.playing = True
+        while self.playing:
+            self.crosses.move()
+            self.draw()
+            self.noughts.move()
+            self.draw()
 
     def draw(self):
         """ Updates the board """
@@ -37,5 +40,7 @@ class Board():
         print(self.board[6] + "|" + self.board[7] + "|" + self.board[8])
         print("   |   |   ")
 
+
 b = Board()
-b.new()
+while b.running:
+    b.new()

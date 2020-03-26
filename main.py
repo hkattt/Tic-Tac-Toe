@@ -8,9 +8,10 @@ class Board():
 
     def new(self):
         decision = input("Do you want to play with a friend? (Y / N) ")
+        print("")
         if decision == "Y" or decision == "y":
-            self.crosses = Player()
-            self.noughts = Player(False, True)
+            self.crosses = Player(self)
+            self.noughts = Player(self, False, True)
     
     def run(self):
         self.crosses.move()

@@ -6,7 +6,8 @@ class Board():
     """ Main board / game class """
     def __init__(self):
         self.running = True
-        self.board = ["   " for i in range(9)]
+        self.board = [["   " for i in range(3)], ["   " for i in range(3)], ["   " for i in range(3)]]
+        self.player_symbols = [" X ", " Y "]
 
     def new(self):
         """ Creates a new game """
@@ -21,25 +22,38 @@ class Board():
     def run(self):
         self.playing = True
         while self.playing:
-            self.crosses.move()
+            previous_x, previous_y = self.crosses.move()
             self.draw()
-            self.noughts.move()
+            if self.game_over(previous_x, previous_y):
+                self.playing = False
+                break
+            previous_x, previous_y = self.noughts.move()
+            if self.game_over(previous_x, previous_y):
+                self.playing = False
+                break
             self.draw()
 
     def draw(self):
         """ Updates the board """
         print("   |   |   ")
-        print(self.board[0] + "|" + self.board[1] + "|" + self.board[2])
+        print(self.board[0][0] + "|" + self.board[1][0] + "|" + self.board[2][0])
         print("   |   |   ")
         print("-----------")
         print("   |   |   ")
-        print(self.board[3] + "|" + self.board[4] + "|" + self.board[5])
+        print(self.board[0][1] + "|" + self.board[1][1] + "|" + self.board[2][1])
         print("   |   |   ")
         print("-----------")
         print("   |   |   ")
-        print(self.board[6] + "|" + self.board[7] + "|" + self.board[8])
+        print(self.board[0][2] + "|" + self.board[1][2] + "|" + self.board[2][2])
         print("   |   |   ")
 
+    def game_over(self, X, Y):
+        if (self.board[0][Y] in self.player_symbols) and self.board[0][Y] == self.board[1][Y] == self.board[2][Y]:
+            return True
+        elif self.board[X][0] in self.player_symbols and self.board[X][0] == self.board[X][1] == self.board[X][2]:
+            return True
+        return False
+        
 
 b = Board()
 while b.running:

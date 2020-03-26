@@ -16,9 +16,10 @@ class Player():
     def move(self):
         """ Places a nought or cross on the board """
         try: 
-            position = int(input("Select a position to place an {} (1-9): ".format(self.type))) - 1
-            if self.valid_move(position):
-                self.game.board[position] = " " + "{}".format(self.type) + " "
+            X, Y = input("Select a position to place an {} (X, Y): ".format(self.type)).split(" ")
+            X, Y = int(X) - 1, int(Y) - 1
+            if self.valid_move(X, Y):
+                self.game.board[X][Y] = " " + "{}".format(self.type) + " "
             else:
                 raise Invalid_Move
         except IndexError:
@@ -29,9 +30,10 @@ class Player():
             print("You cannot place a {} on a taken square!!".format(self.type))
             print("")
             self.move()
+        return X, Y
 
-    def valid_move(self, position):
+    def valid_move(self, X, Y):
         """ Checks if the chosen move is legal """
-        if self.game.board[position] == "   ":
+        if self.game.board[X][Y] == "   ":
             return True
         return False

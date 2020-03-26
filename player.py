@@ -21,7 +21,7 @@ class Player():
             if self.valid_move(X, Y):
                 self.game.board[X][Y] = " " + "{}".format(self.type) + " "
             else:
-                raise Invalid_Move
+                raise InvalidMoveError
         except IndexError:
             print("Your input must be between 1 and 9!!")
             print("")

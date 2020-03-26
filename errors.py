@@ -4,6 +4,9 @@ class Error(Exception):
     """ Base class for other classes"""
     pass
 
-class Invalid_Move(Error):
+class InvalidMoveError(Error):
     """ Player tried to put a piece on a taken square """
     pass
+
+class InputError(Error):
+    """ Player put in an unexpected input """

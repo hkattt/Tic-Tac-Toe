@@ -11,13 +11,20 @@ class Board():
 
     def new(self):
         """ Creates a new game """
-        decision = input("Do you want to play with a friend? (Y / N) ") # single player or multiplayer
-        print("")
-        # multiplayer 
-        if decision == "Y" or decision == "y":
-            self.crosses = Player(self)
-            self.noughts = Player(self, False, True)
-        self.run()
+        try:
+            decision = input("Do you want to play with a friend? (Y / N) ") # single player or multiplayer
+            print("")
+            if decision != "Y" and decision != "Y":
+                raise InputError
+            # multiplayer 
+            if decision == "Y" or decision == "y":
+                self.crosses = Player(self)
+                self.noughts = Player(self, False, True)
+            self.run()
+        except InputError:
+            print("Make sure you enter the correct value!! (Y / N)")
+            print("")
+            self.new()
     
     def run(self):
         self.playing = True
@@ -63,7 +70,6 @@ class Board():
         print(winner + "'s WON!!")
         print("")
         
-
 b = Board()
 while b.running:
     b.new()

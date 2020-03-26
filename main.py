@@ -3,15 +3,19 @@
 from player import *
 
 class Board():
+    """ Main board / game class """
     def __init__(self):
         self.board = ["   " for i in range(9)]
 
     def new(self):
-        decision = input("Do you want to play with a friend? (Y / N) ")
+        """ Creates a new game """
+        decision = input("Do you want to play with a friend? (Y / N) ") # single player or multiplayer
         print("")
+        # multiplayer 
         if decision == "Y" or decision == "y":
             self.crosses = Player(self)
             self.noughts = Player(self, False, True)
+        self.run()
     
     def run(self):
         self.crosses.move()
@@ -20,6 +24,7 @@ class Board():
         self.draw()
 
     def draw(self):
+        """ Updates the board """
         print("   |   |   ")
         print(self.board[0] + "|" + self.board[1] + "|" + self.board[2])
         print("   |   |   ")
@@ -34,4 +39,3 @@ class Board():
 
 b = Board()
 b.new()
-b.run()

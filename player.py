@@ -3,6 +3,7 @@
 from errors import *
 
 class Player():
+    """ Player (user) class """
     def __init__(self, game, cross=True, nought=False):
         self.cross = cross
         self.nought = nought
@@ -13,6 +14,7 @@ class Player():
             self.type = "O"
 
     def move(self):
+        """ Places a nought or cross on the board """
         try: 
             position = int(input("Select a position to place an {} (1-9): ".format(self.type))) - 1
             if self.valid_move(position):
@@ -29,6 +31,7 @@ class Player():
             self.move()
 
     def valid_move(self, position):
+        """ Checks if the chosen move is legal """
         if self.game.board[position] == "   ":
             return True
         return False

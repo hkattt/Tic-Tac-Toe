@@ -11,7 +11,7 @@ class Board():
     def __init__(self):
         self.running = True
         self.board = [["   " for i in range(3)], ["   " for i in range(3)], ["   " for i in range(3)]]
-        self.player_symbols = [" X ", " Y "]
+        self.player_symbols = [" X ", " O "]
         self.app = SimpleApp_tk(None)
         self.app.title("Tic Tac Toe")
         self.app.write("TIC TAC TOE")

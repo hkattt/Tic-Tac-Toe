@@ -6,5 +6,10 @@ class AI():
         self.cross = cross
         self.nought = nought
 
+    def minimax(self, isMaximizing):
+        pass
+                
     def move(self):
         pass
+
+

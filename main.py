@@ -54,6 +54,10 @@ class Board():
                 self.victory("X")
                 self.playing = False
                 break
+            elif self.tie():
+                self.app.write("DRAW!!")
+                self.playing = False
+                break
             # noughts move
             previous_x, previous_y = self.noughts.move()
             self.draw()
@@ -61,7 +65,11 @@ class Board():
             if self.game_over(previous_x, previous_y):
                 self.victory("X")
                 self.playing = False
-                break 
+                break
+            elif self.tie():
+                self.app.write("DRAW!!")
+                self.playing = False
+                break
                  
     def draw(self):
         """ Updates the board """
@@ -93,6 +101,15 @@ class Board():
         elif self.board[0][2] in self.player_symbols and self.board[0][2] == self.board[1][1] == self.board[2][0]:
             return True
         return False
+
+    def tie(self):
+        """ Checks if the game is tied """
+        # Cycles through the entire board, returns true if none of the elements are empty
+        for column in self.board:
+            for symbol in column:
+                if symbol == "   ":
+                    return False
+        return True
 
     def victory(self, winner):
         """ Victroy message """

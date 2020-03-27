@@ -1,6 +1,8 @@
 # Tic Tac Toe Main File (Run to play)
 
 from player import *
+from gui import *
+import time
 
 class Board():
     """ Main board / game class """
@@ -8,12 +10,18 @@ class Board():
         self.running = True
         self.board = [["   " for i in range(3)], ["   " for i in range(3)], ["   " for i in range(3)]]
         self.player_symbols = [" X ", " Y "]
+        self.app = SimpleApp_tk(None)
+        self.app.title("Tic Tac Toe")
+        self.app.write("TIC TAC TOE")
+        self.app.write("")
 
     def new(self):
         """ Creates a new game """
         try:
-            decision = input("Do you want to play with a friend? (Y / N) ") # single player or multiplayer
-            print("")
+            self.app.write("Do you want to play with a friend? (Y / N) ")
+            self.app.wait_variable(self.app.inputVariable)
+            decision = self.app.inputVariable.get() # single player or multiplayer
+            self.app.write("")
             # Checks if the input was valid
             if decision != "Y" and decision != "y":
                 raise InputError
@@ -24,8 +32,8 @@ class Board():
             self.run()
         # invalid input
         except InputError:
-            print("Make sure you enter the correct value!! (Y / N)")
-            print("")
+            self.app.write("Make sure you enter the correct value!! (Y / N)")
+            self.app.write("")
             self.new()
     
     def run(self):
@@ -52,17 +60,18 @@ class Board():
                  
     def draw(self):
         """ Updates the board """
-        print("   |   |   ")
-        print(self.board[0][0] + "|" + self.board[1][0] + "|" + self.board[2][0])
-        print("   |   |   ")
-        print("-----------")
-        print("   |   |   ")
-        print(self.board[0][1] + "|" + self.board[1][1] + "|" + self.board[2][1])
-        print("   |   |   ")
-        print("-----------")
-        print("   |   |   ")
-        print(self.board[0][2] + "|" + self.board[1][2] + "|" + self.board[2][2])
-        print("   |   |   ")
+        self.app.write("   |   |   ")
+        self.app.write(self.board[0][0] + "|" + self.board[1][0] + "|" + self.board[2][0])
+        self.app.write("   |   |   ")
+        self.app.write("-----------")
+        self.app.write("   |   |   ")
+        self.app.write(self.board[0][1] + "|" + self.board[1][1] + "|" + self.board[2][1])
+        self.app.write("   |   |   ")
+        self.app.write("-----------")
+        self.app.write("   |   |   ")
+        self.app.write(self.board[0][2] + "|" + self.board[1][2] + "|" + self.board[2][2])
+        self.app.write("   |   |   ")
+        self.app.write("")
 
     def game_over(self, X, Y):
         """ Checks if the game was won by either player """
@@ -82,27 +91,31 @@ class Board():
 
     def victory(self, winner):
         """ Victroy message """
-        print("")
-        print(winner + "'s WON!!")
-        print("")
+        self.app.write("")
+        self.app.write(winner + "'s WON!!")
+        self.app.write("")
 
     def end_game(self):
         """ Displayed after a game is finished """
-        print("")
-        try: 
-            decision = input("Do you want to play again? (Y / N) ")
+        self.app.write("")
+        try:
+            self.app.write("Do you want to play again? (Y / N) ")
+            self.app.wait_variable(self.app.inputVariable)
+            decision = self.app.inputVariable.get() 
+            self.app.write("")
             # Checks if the input was valid
             if decision != "Y" and decision != "y" and decision != "N" and decision != "n":
                 raise InputError
             # Do not want to play again
             if decision == "N" or decision == "n":
                 self.running = False
-                print("THANKS FOR PLAYING!!")
-                print("")
+                self.app.write("THANKS FOR PLAYING!!")
+                self.app.write("")
+                time.sleep(1.5)
         # invalid input 
         except InputError:
-            print("Make sure you enter the correct value!! (Y / N)")
-            print("")
+            self.app.write("Make sure you enter the correct value!! (Y / N)")
+            self.app.write("")
             self.end_game()
 
     def reset(self):

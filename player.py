@@ -16,8 +16,10 @@ class Player():
 
     def move(self):
         """ Places a nought or cross on the board """
-        try: 
-            X, Y = input("Select a position to place an {} (X, Y): ".format(self.type)).strip().split(" ")
+        try:
+            self.game.app.write("Select a position to place an {} (X, Y): ".format(self.type))
+            self.game.app.wait_variable(self.game.app.inputVariable)
+            X, Y = self.game.app.inputVariable.get().strip().split()
             X, Y = int(X) - 1, int(Y) - 1
             # Checks if the given input is a legal move
             if self.valid_move(X, Y):
@@ -26,13 +28,13 @@ class Player():
                 raise InvalidMoveError
         # Input value is too large
         except IndexError:
-            print("Your input must be between 1 and 3!!")
-            print("")
+            self.game.app.write("Your input must be between 1 and 3!!")
+            self.game.app.write("")
             self.move()
         # Move is illegal
         except InvalidMoveError:
-            print("You cannot place a {} on a taken square!!".format(self.type))
-            print("")
+            self.game.app.write("You cannot place a {} on a taken square!!".format(self.type))
+            self.game.app.write("")
             self.move()
         return X, Y
 

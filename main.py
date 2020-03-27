@@ -42,7 +42,7 @@ class Board():
         self.run()
     
     def run(self):
-        # creates a game loop (this runs inside the main loop)
+        """ creates a game loop (this runs inside the main loop) """
         self.playing = True
         self.draw()
         while self.playing:

@@ -63,7 +63,7 @@ class Board():
             self.draw()
             # checks if noughts won
             if self.win(previous_x, previous_y):
-                self.victory_screen("X")
+                self.victory_screen("O")
                 self.playing = False
                 break
             elif self.tie():

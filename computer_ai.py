@@ -11,10 +11,10 @@ class AI():
     def minimax(self, state, isMaximizing):
         """ Performs the minimax algorithm to determine the best move """
         # AI won
-        if self.current_state(state) == "O":
+        if self.current_state(state) == " O ":
             return 1, None
         # Human won
-        elif self.current_state(state) == "X":
+        elif self.current_state(state) == " X ":
             return -1, None
         # Draw
         elif self.current_state(state) == 0:

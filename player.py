@@ -21,17 +21,17 @@ class Player():
             self.game.app.wait_variable(self.game.app.inputVariable)
             X, Y = self.game.app.inputVariable.get().strip().split()
             X, Y = int(X) - 1, int(Y) - 1
-            # Checks if the given input is a legal move
+            # checks if the given input is a legal move
             if self.valid_move(X, Y):
                 self.game.board[X][Y] = " " + "{}".format(self.type) + " "
             else:
                 raise InvalidMoveError
-        # Input value is too large
+        # input value is too large
         except IndexError:
             self.game.app.write("Your input must be between 1 and 3!!")
             self.game.app.write("")
             self.move()
-        # Move is illegal
+        # move is illegal
         except InvalidMoveError:
             self.game.app.write("You cannot place a {} on a taken square!!".format(self.type))
             self.game.app.write("")

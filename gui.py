@@ -61,10 +61,8 @@ class SimpleApp_tk(Tk):
     def OnPressEnter(self,event):
         self.inputVariable.set( self.entryVariable.get() )
 
-    # The write function simulates the behaviour of the print method
-    # but uses the input textfield and text display instead of the usual
-    # standard input/output we're used to from our previous programs
     def write(self,msg):
+        """ The write function simulates the behaviour of the print method """
         self.text.config(state=NORMAL)
         self.text.insert(END, msg)
         self.text.insert(END, "\n")

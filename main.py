@@ -27,14 +27,14 @@ class Board():
             self.app.wait_variable(self.app.inputVariable)
             decision = int(self.app.inputVariable.get().strip()) # single player or multiplayer
             self.app.write("")
-            # Checks if the input was valid
+            # checks if the input was valid
             if decision != 1 and decision != 2:
                 raise InputError
-            # Singleplayer 
+            # singleplayer 
             if decision == 1:
                 self.crosses = Player(self)
                 self.noughts = AI(self)
-            # Multiplayer
+            # multiplayer
             else:
                 self.crosses = Player(self)
                 self.noughts = Player(self, False, True)
@@ -93,23 +93,23 @@ class Board():
 
     def win(self, X, Y):
         """ Checks if the game was won by either player """
-        # Horizontal direction
+        # horizontal direction
         if self.board[0][Y] in self.player_symbols and self.board[0][Y] == self.board[1][Y] == self.board[2][Y]:
             return True
-        # Vertical direction
+        # vertical direction
         elif self.board[X][0] in self.player_symbols and self.board[X][0] == self.board[X][1] == self.board[X][2]:
             return True
-        # Diagonal 1
+        # diagonal 1
         elif self.board[0][0] in self.player_symbols and self.board[0][0] == self.board[1][1] == self.board[2][2]:
             return True
-        # Diagonal 2
+        # diagonal 2
         elif self.board[0][2] in self.player_symbols and self.board[0][2] == self.board[1][1] == self.board[2][0]:
             return True
         return False
 
     def tie(self):
         """ Checks if the game is tied """
-        # Cycles through the entire board, returns true if none of the elements are empty
+        # cycles through the entire board, returns true if none of the elements are empty
         for column in self.board:
             for symbol in column:
                 if symbol == "   ":
@@ -136,10 +136,10 @@ class Board():
             self.app.wait_variable(self.app.inputVariable)
             decision = self.app.inputVariable.get() 
             self.app.write("")
-            # Checks if the input was valid
+            # checks if the input was valid
             if decision != "Y" and decision != "y" and decision != "N" and decision != "n":
                 raise InputError
-            # Do not want to play again
+            # do not want to play again
             if decision == "N" or decision == "n":
                 self.running = False
                 self.app.write("THANKS FOR PLAYING!!")

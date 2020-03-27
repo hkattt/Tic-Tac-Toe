@@ -5,9 +5,9 @@ from errors import *
 class Player():
     """ Player (user) class """
     def __init__(self, game, cross=True, nought=False):
+        self.game = game
         self.cross = cross
         self.nought = nought
-        self.game = game
         # determines what symbol the player is using
         if self.cross:
             self.type = "X"

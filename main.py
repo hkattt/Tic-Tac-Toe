@@ -1,7 +1,9 @@
 # Tic Tac Toe Main File (Run to play)
 
+# importing other files
 from player import *
 from gui import *
+from computer_ai import *
 import time
 
 class Board():
@@ -20,21 +22,24 @@ class Board():
         try:
             self.app.write("Do you want to play with a friend? (Y / N) ")
             self.app.wait_variable(self.app.inputVariable)
-            decision = self.app.inputVariable.get() # single player or multiplayer
+            decision = self.app.inputVariable.get().strip() # single player or multiplayer
             self.app.write("")
             # Checks if the input was valid
-            if decision != "Y" and decision != "y":
+            if decision != "Y" and decision != "y" and decision != "N" and decision != "n":
                 raise InputError
             # multiplayer 
             if decision == "Y" or decision == "y":
                 self.crosses = Player(self)
                 self.noughts = Player(self, False, True)
-            self.run()
+            else:
+                self.crosses = Player(self)
+                self.noughts = AI(self)
         # invalid input
         except InputError:
             self.app.write("Make sure you enter the correct value!! (Y / N)")
             self.app.write("")
             self.new()
+        self.run()
     
     def run(self):
         # creates a game loop (this runs inside the main loop)
@@ -56,7 +61,7 @@ class Board():
             if self.game_over(previous_x, previous_y):
                 self.victory("X")
                 self.playing = False
-                break
+                break 
                  
     def draw(self):
         """ Updates the board """

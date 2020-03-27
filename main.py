@@ -20,23 +20,28 @@ class Board():
     def new(self):
         """ Creates a new game """
         try:
-            self.app.write("Do you want to play with a friend? (Y / N) ")
+            self.app.write("GAME MODES: ")
+            self.app.write("1 - Single Player (Against the AI) ")
+            self.app.write("2 - Multiplayer (With a friend) ")
+            self.app.write("")
             self.app.wait_variable(self.app.inputVariable)
-            decision = self.app.inputVariable.get().strip() # single player or multiplayer
+            decision = int(self.app.inputVariable.get().strip()) # single player or multiplayer
             self.app.write("")
             # Checks if the input was valid
-            if decision != "Y" and decision != "y" and decision != "N" and decision != "n":
+            if decision != 1 and decision != 2:
                 raise InputError
-            # multiplayer 
-            if decision == "Y" or decision == "y":
-                self.crosses = Player(self)
-                self.noughts = Player(self, False, True)
-            else:
+            # Singleplayer 
+            if decision == 1:
                 self.crosses = Player(self)
                 self.noughts = AI(self)
+            # Multiplayer
+            else:
+                self.crosses = Player(self)
+                self.noughts = Player(self, False, True)
+                
         # invalid input
         except InputError:
-            self.app.write("Make sure you enter the correct value!! (Y / N)")
+            self.app.write("Make sure you enter the correct value!! (1 or 2)")
             self.app.write("")
             self.new()
         self.run()

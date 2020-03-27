@@ -17,7 +17,7 @@ class Player():
     def move(self):
         """ Places a nought or cross on the board """
         try: 
-            X, Y = input("Select a position to place an {} (X, Y): ".format(self.type)).split(" ")
+            X, Y = input("Select a position to place an {} (X, Y): ".format(self.type)).strip().split(" ")
             X, Y = int(X) - 1, int(Y) - 1
             # Checks if the given input is a legal move
             if self.valid_move(X, Y):

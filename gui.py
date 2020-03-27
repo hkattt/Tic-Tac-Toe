@@ -1,6 +1,6 @@
-#!/usr/local/bin/python3
+# GUI class file
+
 """
-gui.py - provides the interface for the GUI
  
 Written by Bruce Fuda for Intermediate Programming
 Python RPG Assignment 2014
@@ -8,7 +8,7 @@ Python RPG Assignment 2014
 Modified with permission by Edwin Griffin for
 Intermediate Programming Object-Oriented Assignment 2019
 
-This code was edited by Hugo Kat
+This code was further modifield by Hugo Kat
 
 """
 

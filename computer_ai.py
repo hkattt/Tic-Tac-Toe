@@ -12,4 +12,10 @@ class AI():
     def move(self):
         pass
 
+    def valid_move(self, X, Y):
+        """ Checks if the chosen move is legal """
+        if self.game.board[X][Y] == "   ":
+            return True
+        return False
+
 

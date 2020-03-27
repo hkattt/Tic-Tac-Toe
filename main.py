@@ -50,24 +50,24 @@ class Board():
             previous_x, previous_y = self.crosses.move()
             self.draw()
             # checks if crosses won
-            if self.game_over(previous_x, previous_y):
-                self.victory("X")
+            if self.win(previous_x, previous_y):
+                self.victory_screen("X")
                 self.playing = False
                 break
             elif self.tie():
-                self.app.write("DRAW!!")
+                self.draw_screen()
                 self.playing = False
                 break
             # noughts move
             previous_x, previous_y = self.noughts.move()
             self.draw()
             # checks if noughts won
-            if self.game_over(previous_x, previous_y):
-                self.victory("X")
+            if self.win(previous_x, previous_y):
+                self.victory_screen("X")
                 self.playing = False
                 break
             elif self.tie():
-                self.app.write("DRAW!!")
+                self.draw_screen()
                 self.playing = False
                 break
                  
@@ -86,7 +86,7 @@ class Board():
         self.app.write("   |   |   ")
         self.app.write("")
 
-    def game_over(self, X, Y):
+    def win(self, X, Y):
         """ Checks if the game was won by either player """
         # Horizontal direction
         if self.board[0][Y] in self.player_symbols and self.board[0][Y] == self.board[1][Y] == self.board[2][Y]:
@@ -111,10 +111,16 @@ class Board():
                     return False
         return True
 
-    def victory(self, winner):
+    def victory_screen(self, winner):
         """ Victroy message """
         self.app.write("")
         self.app.write(winner + "'s WON!!")
+        self.app.write("")
+
+    def draw_screen(self):
+        """ Draw message """
+        self.app.write("")
+        self.app.write(" THE GAME ENDED IN A DRAW!!")
         self.app.write("")
 
     def end_game(self):

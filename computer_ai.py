@@ -40,7 +40,7 @@ class AI():
 
         # human move
         else:
-            # sets the initial best higher than all possible outcomes (we want a high human move)
+            # sets the initial best higher than all possible outcomes (we want a low human move)
             best = (2, None)
             for x in range(len(state)):
                 for y in range(len(state[x])):
@@ -64,15 +64,6 @@ class AI():
         
     def current_state(self, state):
         """ Returns the current state of the board (won, lost, draw, etc)"""
-        # checks for a draw
-        draw = True
-        for i in range(0, 3):
-            for j in range(0, 3):
-                if state[i][j] == "   ":
-                    draw = False
-        if draw:
-            return 0
-
         # checks for a vertical win
         if state[0][0] == state[0][1] == state[0][2] and state[0][0] != "   ":
             return state[0][0]
@@ -94,6 +85,15 @@ class AI():
             return state[0][0]
         if state[0][2] == state[1][1] == state[2][0] and state[0][2] != "   ":
             return state[0][2]
+
+        # checks for a draw
+        draw = True
+        for i in range(0, 3):
+            for j in range(0, 3):
+                if state[i][j] == "   ":
+                    draw = False
+        if draw:
+            return 0
 
         # the game is still going
         return None
